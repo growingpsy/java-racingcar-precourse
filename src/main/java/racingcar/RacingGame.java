@@ -3,6 +3,7 @@ package racingcar;
 import java.util.Scanner;
 import java.util.ArrayList;
 import utils.GameUtils;
+import java.util.Random;
 
 public class RacingGame {
     private Scanner scanner;
@@ -20,7 +21,9 @@ public class RacingGame {
         try {
             inputCars();
             inputNumberOfGames();
-            System.out.println(this.numberOfGames);
+            for (int i = 0; i < this.numberOfGames; i++) {
+                moveCars();
+            }
         } catch (IllegalArgumentException e) {
             System.out.println("[ERROR] " + e.getMessage());
         }
@@ -58,6 +61,18 @@ public class RacingGame {
     }
 
     public void getCarinfo() {
+    }
+    public void moveCars() {
+        Random random = new Random();
+        for (int i = 0; i < this.cars.size(); i++) {  // 'Cars' -> 'cars'로 수정
+            Car nowCar = cars.get(i);
+            int randNum = random.nextInt(10);  // RandomUtils 대체
+            if (isGo(randNum)) nowCar.movePosition();
+        }
+    }
+    public boolean isGo(int num) {
+        if (num >= 4) return true;
+        return false;
     }
     public void printResult() {
     }
